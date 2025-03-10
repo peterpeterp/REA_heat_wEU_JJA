@@ -5,7 +5,13 @@ We reproduce the work by Ragone et al. 2018 using the fully coupled version of C
 
 Ragone, F., Wouters, J., & Bouchet, F. (2018). Computation of extreme heat waves in climate models using a large deviation algorithm. Proceedings of the National Academy of Sciences of the United States of America, 115(1), Article 1. https://doi.org/10.1073/pnas.1712645115
 
+## Experiments
 
+### Current climate -> "ssp370-2025"
+Initial conditions from the years 2024-2026 from a 42 member ensemble folowing the SSP370 scenario.
+
+### Pre-industrial -> "piControl"
+Initial conditions from a piControl simulation taking every third year until we have 126 years (same number as for the ssp370-2025 ensemble).
 
 ## Available output
 
