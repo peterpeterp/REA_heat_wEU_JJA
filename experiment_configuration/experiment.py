@@ -21,6 +21,9 @@ class experiment():
         # experiment name
         self.product_name = "heat_wEU_JJA"
 
+        # git repo
+        self.git_repo = "https://github.com/peterpeterp/REA_heat_wEU_JJA"
+
         # length of simulation steps
         self.n_days = 5
 
