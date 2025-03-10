@@ -1,0 +1,11 @@
+#!/bin/bash
+#SBATCH --job-name=current_k0p03_v1_step18
+#SBATCH --begin=now+10minute
+#SBATCH --partition=compute
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --time=04:00:00
+#SBATCH --account=uc1275
+#SBATCH --output=log/%j
+#SBATCH --error=log/%j
+python /home/u/u290372/projects/hot_summer_ensembles/main_launcher.py --experiment current_k0p03_v1 --verbose --relaunch_after_completion

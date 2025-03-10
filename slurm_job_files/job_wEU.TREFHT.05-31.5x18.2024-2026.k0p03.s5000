@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH --job-name=c5_step18
+#SBATCH --begin=now+10minute
+#SBATCH --partition=compute
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --time=04:00:00
+#SBATCH --account=uc1275
+#SBATCH --output=log/%j
+#SBATCH --error=log/%j
+#SBATCH --dependency=afterok:14524061,14524057,14524069,14524068,14524062,14524058,14524054,14524050,14524046,14524038,14524035,14524032,14524027,14524023,14524016,14524006,14523992,14523926,14522715,14524034,14524037,14524044,14524049,14524053,14524026,14524031,14524022,14524015,14524005,14523990,14523925
+python /home/u/u290372/projects/hot_summer_ensembles/main_launcher.py --experiment c5 --verbose --relaunch_cases_which_are_unclear --relaunch_after_completion

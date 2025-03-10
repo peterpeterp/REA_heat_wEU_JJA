@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH --job-name=c3_step18
+#SBATCH --begin=now+10minute
+#SBATCH --partition=compute
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --time=04:00:00
+#SBATCH --account=uc1275
+#SBATCH --output=log/%j
+#SBATCH --error=log/%j
+#SBATCH --dependency=afterok:14386271,14386334,14386333,14386328,14386327,14386323,14386315,14386305,14386302,14386291,14386282,14386279,14386272,14386268,14386263,14385431,14386301,14386304,14386289,14386281,14386278,14386322,14386314
+python /home/u/u290372/projects/hot_summer_ensembles/main_launcher.py --experiment c3 --verbose --relaunch_cases_which_are_unclear --relaunch_after_completion

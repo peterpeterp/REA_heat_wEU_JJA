@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# change into the directory
+cd /home/u/u290372/projects/hot_summer_ensembles/
+
+jid=$(sbatch job_1-1.txt "$@" | cut -d ' ' -f4)
+
+
+python /home/u/u290372/projects/hot_summer_ensembles/main_launcher.py --experiment current_k0p03_v1 --verbose --dry_run
+
