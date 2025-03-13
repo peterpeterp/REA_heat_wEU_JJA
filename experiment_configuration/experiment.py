@@ -51,8 +51,6 @@ class experiment():
         for k,v in ini_config.__dict__.items():
             self.__dict__[k] = v        
 
-
-
         assert self.n_members == 42*3, \
             f"the number of initial conditions has changed: expected=42*3 got={self.n_members}"
 
@@ -79,7 +77,7 @@ class experiment():
             "ndays" : self.n_days,
             "perturbation_type" : self.perturbation_type,
             "perturbation_order_of_magnitude" : self.perturbation_order_of_magnitude,
-            "output" : self.output,
+            "user_nl_file_directory" : '/home/u/u290372/projects/REA_low_NEP_EU/experiment_configuration/user_nl_files',
         }
 
         self.dir_archive=f"/work/{self.dkrz_project}/u290372/cesm215_archive"
