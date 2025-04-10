@@ -1,9 +1,9 @@
 import sys,os,glob,importlib
 import numpy as np
-from experiment_configuration.regions.region_by_slice import create_or_load_regional_mask, regional_average, shift_lon
+from experiment_configuration.main_observable import main_observable
 
 class experiment():
-    def __init__(self, config):
+    def __init__(self, config, online=True):
         # general settings
         self.dkrz_project = 'bb1152'
         self.dir_scripts=f"/work/bb1152/u290372/cesm215/cime/scripts"
@@ -51,18 +51,14 @@ class experiment():
         for k,v in ini_config.__dict__.items():
             self.__dict__[k] = v        
 
-        assert self.n_members == 42*3, \
-            f"the number of initial conditions has changed: expected=42*3 got={self.n_members}"
+        if online:
+            assert self.n_members == 42*3, \
+                f"the number of initial conditions has changed: expected=42*3 got={self.n_members}"
 
         # experiment name
         self.experiment_name = f"{self.region_of_interest}.{self.observable_of_interest}.{self.start_date_in_year}.{self.n_days}x{self.n_steps}.{self.initial_conditions_name}.k{str(self.k).replace('.','p')}.s{self.seed}"
 
-        # regional mask
-        self.regional_mask = create_or_load_regional_mask(
-            regional_mask_file = f"{self.dir_work}/GKLT/regions/{self.region_of_interest}.nc",
-            slice_lat=slice(44,55), 
-            slice_lon=slice(-4,12),
-            )
+
 
         # template dict for todos
         # the dict will later be transformed to command line arguments for the launching script
@@ -84,11 +80,8 @@ class experiment():
         self.dir_out = f"{self.dir_work}/GKLT/{self.experiment_name}"
         self.dir_archive_post = f"{self.dir_archive}/GKLT/{self.experiment_name}"
 
-    def get_main_observable(self, nc):
-        nc = shift_lon(nc)
-        obs = nc[self.observable_of_interest] - 273.15
-        obs = regional_average(obs, self.regional_mask)
-        return obs
+    def get_main_observable(self, archive_path):
+        return float(main_observable(archive_path))
 
     def calc_score(self, x):
         return float(np.exp(self.k * x.sum()))
