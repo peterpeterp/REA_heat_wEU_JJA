@@ -7,7 +7,6 @@ preprocessing_attr = 'big rectangle around Europe'
 
 def preprocessor(nc):
     nc = nc.roll(lon=144, roll_coords=True)
-    nc = nc.assign_coords(lon=(nc.lon + 180) % 360 - 180).sel(dict(lat=slice(10,80), lon=slice(-30,50)))
     pr = nc['PRECC'] + nc['PRECL'] 
     pr *= 24*60*60 * 1000
     return xr.Dataset({'pr':pr})
