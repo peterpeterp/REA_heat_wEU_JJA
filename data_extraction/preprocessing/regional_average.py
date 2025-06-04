@@ -16,4 +16,4 @@ def preprocessor(nc):
         )
 
     nc = shift_lon(nc)
-    return xr.Dataset({'LHFLX':regional_average(nc['LHFLX'], regional_mask)})
+    return xr.Dataset({'SHFLX':regional_average(nc['SHFLX'], regional_mask)})
