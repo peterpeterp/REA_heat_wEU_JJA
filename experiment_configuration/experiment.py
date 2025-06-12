@@ -5,14 +5,13 @@ from experiment_configuration.main_observable import main_observable
 class experiment():
     def __init__(self, config, online=True):
         # general settings
-        self.dkrz_project = 'bb1152'
+        self.dkrz_project_for_archive = 'bb1152'
         self.dir_scripts=f"/work/bb1152/u290372/cesm215/cime/scripts"
         self.dir_run=f"/scratch/u/u290372/cesm215_output"
         self.dir_work=f"/work/bb1152/u290372"
-        self.dir_repo=f"/home/u/u290372/projects/cesm215_peters_scripts/"
 
         # launching script
-        self.launching_script = "/home/u/u290372/projects/cesm215_peters_scripts/branch_perturbed.py"
+        self.launching_script = "/home/u/u290372/projects/REA_with_CESM2/branch_perturbed.py"
 
         # perturbation method and order of magnitude
         self.perturbation_order_of_magnitude = -13
@@ -52,8 +51,12 @@ class experiment():
             self.__dict__[k] = v        
 
         if online:
-            assert self.n_members == 42*3, \
-                f"the number of initial conditions has changed: expected=42*3 got={self.n_members}"
+            if 'dry' in self.experiment_identifier or 'wet' in self.experiment_identifier:
+                assert self.n_members == 100, \
+                    f"the number of initial conditions has changed: expected=100 got={self.n_members}" 
+            else:               
+                assert self.n_members == 42*3, \
+                    f"the number of initial conditions has changed: expected=42*3 got={self.n_members}"
 
         # experiment name
         self.experiment_name = f"{self.region_of_interest}.{self.observable_of_interest}.{self.start_date_in_year}.{self.n_days}x{self.n_steps}.{self.initial_conditions_name}.k{str(self.k).replace('.','p')}.s{self.seed}"
@@ -63,7 +66,7 @@ class experiment():
         # template dict for todos
         # the dict will later be transformed to command line arguments for the launching script
         self.launch_template = {
-            "dkrz_project" : self.dkrz_project,
+            "dkrz_project_for_archive" : self.dkrz_project_for_archive,
             "case_identifier" : "",
             "case_path" : "",
             "parent_path" : "",
@@ -73,10 +76,10 @@ class experiment():
             "ndays" : self.n_days,
             "perturbation_type" : self.perturbation_type,
             "perturbation_order_of_magnitude" : self.perturbation_order_of_magnitude,
-            "user_nl_file_directory" : '/home/u/u290372/projects/REA_low_NEP_EU/experiment_configuration/user_nl_files',
+            "user_nl_file_directory" : '/home/u/u290372/projects/REA_heat_wEU_JJA/experiment_configuration/user_nl_files',
         }
 
-        self.dir_archive=f"/work/{self.dkrz_project}/u290372/cesm215_archive"
+        self.dir_archive=f"/work/{self.dkrz_project_for_archive}/u290372/cesm215_archive"
         self.dir_out = f"{self.dir_work}/GKLT/{self.experiment_name}"
         self.dir_archive_post = f"{self.dir_archive}/GKLT/{self.experiment_name}"
 
