@@ -6,6 +6,7 @@ class experiment():
     def __init__(self, config, online=True):
         # general settings
         self.dkrz_project_for_archive = 'bb1152'
+        self.dkrz_project_for_accounting = 'bb1445'
         self.dir_scripts=f"/work/bb1152/u290372/cesm215/cime/scripts"
         self.dir_run=f"/scratch/u/u290372/cesm215_output"
         self.dir_work=f"/work/bb1152/u290372"
@@ -87,7 +88,7 @@ class experiment():
         return float(main_observable(archive_path))
 
     def calc_score(self, x):
-        return float(np.exp(self.k * x.sum()))
+        return float(np.exp(self.k * x))
 
 
 

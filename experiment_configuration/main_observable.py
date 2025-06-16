@@ -39,7 +39,7 @@ def regional_average(y, regional_mask):
 
 
 def main_observable(archive_path):
-    h_files = glob.glob(f"{archive_path}/lnd/hist/*h1*")
+    h_files = glob.glob(f"{archive_path}/atm/hist/*h1*")
     assert len(h_files) > 0, f"h-file missing - {archive_path}"
     assert len(h_files) == 1, f"multiple h1-files available - {archive_path}"
 
@@ -52,6 +52,6 @@ def main_observable(archive_path):
 
     with xr.open_dataset(h_files[0]) as nc:
         nc = shift_lon(nc)
-        obs = nc[self.observable_of_interest] - 273.15
+        obs = nc['TREFHT'] - 273.15
         obs = regional_average(obs, regional_mask)
         return obs.mean()

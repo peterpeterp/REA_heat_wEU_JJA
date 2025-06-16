@@ -1,0 +1,18 @@
+#!/bin/bash
+#SBATCH --job-name=c7_wet_switch_step14
+#SBATCH --begin=now
+#SBATCH --partition=compute
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --time=04:00:00
+#SBATCH --account=bb1445
+#SBATCH --output=log/%j
+#SBATCH --error=log/%j
+
+module purge
+module load subversion python3/2022.01-gcc-11.2.0 esmf/8.2.0-intel-2021.5.0
+module load esmf/8.2.0-intel-2021.5.0 gcc intel-oneapi-compilers/2022.0.1-gcc-11.2.0 intel-oneapi-mkl/2022.0.1-gcc-11.2.0
+module load openmpi/4.1.2-intel-2021.5.0
+module load cdo nco python3/2022.01-gcc-11.2.0
+module load nano emacs ncview tree
+

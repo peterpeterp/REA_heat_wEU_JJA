@@ -1,0 +1,18 @@
+#!/bin/bash
+#SBATCH --job-name=c7_wet_step14
+#SBATCH --begin=now+10minute
+#SBATCH --partition=compute
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --time=04:00:00
+#SBATCH --account=bb1445
+#SBATCH --output=log/%j
+#SBATCH --error=log/%j
+#SBATCH --dependency=afterok:17663611,17663610,17663605,17663604,17663582,17663571,17663556,17663542,17663518,17663505,17663455,17663429,17663404,17663389,17663317,17660757,17663504,17663428,17663453,17663570,17663581,17663555,17663517,17663540
+module purge
+module load subversion python3/2022.01-gcc-11.2.0 esmf/8.2.0-intel-2021.5.0
+module load esmf/8.2.0-intel-2021.5.0 gcc intel-oneapi-compilers/2022.0.1-gcc-11.2.0 intel-oneapi-mkl/2022.0.1-gcc-11.2.0
+module load openmpi/4.1.2-intel-2021.5.0
+module load cdo nco python3/2022.01-gcc-11.2.0
+module load nano emacs ncview tree
+python main_launcher.py --experiment c7_wet --verbose --relaunch_cases_which_are_unclear --relaunch_after_completion
