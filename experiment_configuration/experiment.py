@@ -58,7 +58,12 @@ class experiment():
             else:               
                 assert self.n_members == 42*3, \
                     f"the number of initial conditions has changed: expected=42*3 got={self.n_members}"
-
+        else:
+            if 'dry' in self.experiment_identifier or 'wet' in self.experiment_identifier:
+                self.n_members = 100
+            else:               
+                self.n_members = 42*3
+                
         # experiment name
         self.experiment_name = f"{self.region_of_interest}.{self.observable_of_interest}.{self.start_date_in_year}.{self.n_days}x{self.n_steps}.{self.initial_conditions_name}.k{str(self.k).replace('.','p')}.s{self.seed}"
 
