@@ -5,12 +5,12 @@ class config():
     ensemble_type = 'rea'
 
     # bias parameter k
-    k = 0.02
+    k = 0.05
 
     # random seed for numpy
-    seed = 6000
+    seed = 9000
 
     # identifier used in sacct and for other purposes
-    experiment_identifier = 'c6_dry'
+    experiment_identifier = 'c9_dry'
 
 

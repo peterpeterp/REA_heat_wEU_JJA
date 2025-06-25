@@ -6,10 +6,10 @@
 #SBATCH --time=04:00:00        # Set a limit on the total run time
 #SBATCH --output=log/%j    # File name for standard output
 #SBATCH --error=log/%j    # File name for standard error output
-#SBATCH --job-name=c6_dry_step17
+#SBATCH --job-name=c8_wet_step18
 #SBATCH --account=bb1445
 #SBATCH --begin=now+10minute
-#SBATCH --dependency=afterok:17728539,17728777,17728776,17728768,17728767,17728756,17728754,17728739,17728737,17728722,17728721,17728707,17728706,17728693,17728692,17728678,17728676,17728665,17728664,17728649,17728648,17728640,17728639,17728628,17728616,17728604,17728597,17728587,17728577,17728560,17728547,17726563,17728596,17728603,17728615,17728627,17728573,17728586,17728559
+#SBATCH --dependency=afterok:17754164,17754321,17754320,17754305,17754291,17754279,17754264,17754246,17754222,17754214,17754193,17754181,17752728,17754304,17754290,17754278,17754263,17754245,17754221,17754192,17754213,17754180
 
 module purge
 module load subversion python3/2022.01-gcc-11.2.0 esmf/8.2.0-intel-2021.5.0
@@ -17,4 +17,4 @@ module load esmf/8.2.0-intel-2021.5.0 gcc intel-oneapi-compilers/2022.0.1-gcc-11
 module load openmpi/4.1.2-intel-2021.5.0
 module load cdo nco python3/2022.01-gcc-11.2.0
 module load nano emacs ncview tree
-python main_launcher.py --experiment c6_dry --verbose --relaunch_cases_which_are_unclear --relaunch_after_completion
+python main_launcher.py --experiment c8_wet --verbose --relaunch_cases_which_are_unclear --relaunch_after_completion

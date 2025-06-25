@@ -1,14 +1,16 @@
 #!/bin/bash
-#SBATCH --job-name=c7_wet_step14
-#SBATCH --begin=now+10minute
-#SBATCH --partition=compute
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=1
-#SBATCH --time=04:00:00
+
+#SBATCH --partition=compute     # Specify partition name
+#SBATCH --ntasks=1             # Specify max. number of tasks to be invoked
+#SBATCH --cpus-per-task=1     # Specify number of CPUs per task
+#SBATCH --time=04:00:00        # Set a limit on the total run time
+#SBATCH --output=log/%j    # File name for standard output
+#SBATCH --error=log/%j    # File name for standard error output
+#SBATCH --job-name=c7_wet_step18
 #SBATCH --account=bb1445
-#SBATCH --output=log/%j
-#SBATCH --error=log/%j
-#SBATCH --dependency=afterok:17663611,17663610,17663605,17663604,17663582,17663571,17663556,17663542,17663518,17663505,17663455,17663429,17663404,17663389,17663317,17660757,17663504,17663428,17663453,17663570,17663581,17663555,17663517,17663540
+#SBATCH --begin=now+10minute
+#SBATCH --dependency=afterok:17700059,17700058,17700037,17700003,17699982,17699962,17699934,17699914,17699877,17699846,17697061,17699825,17700036,17700002,17699981,17699961,17699933,17699913,17699876,17699845
+
 module purge
 module load subversion python3/2022.01-gcc-11.2.0 esmf/8.2.0-intel-2021.5.0
 module load esmf/8.2.0-intel-2021.5.0 gcc intel-oneapi-compilers/2022.0.1-gcc-11.2.0 intel-oneapi-mkl/2022.0.1-gcc-11.2.0

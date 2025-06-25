@@ -7,6 +7,8 @@ from experiment_configuration.main_observable import create_or_load_regional_mas
 name_addition = '-reg'
 preprocessing_attr = 'regional average over region of interest'
 
+from current_var_name import var_name
+
 def preprocessor(nc):
     # regional mask
     regional_mask = create_or_load_regional_mask(
@@ -16,4 +18,4 @@ def preprocessor(nc):
         )
 
     nc = shift_lon(nc)
-    return xr.Dataset({'SHFLX':regional_average(nc['SHFLX'], regional_mask)})
+    return xr.Dataset({var_name:regional_average(nc[var_name], regional_mask)})
