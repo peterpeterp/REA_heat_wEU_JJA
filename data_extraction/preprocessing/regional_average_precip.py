@@ -10,7 +10,7 @@ preprocessing_attr = 'regional average over region of interest'
 
 dummy_exp = experiment(importlib.import_module(f"experiment_configuration.c1").config)
 
-def preprocessor(nc):
+def preprocessor(nc, *args):
     nc = shift_lon(nc)
     pr = nc['PRECC'] + nc['PRECL'] 
     pr *= 24*60*60
