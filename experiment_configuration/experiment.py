@@ -67,7 +67,7 @@ class experiment():
         # experiment name
         self.experiment_name = f"{self.region_of_interest}.{self.observable_of_interest}.{self.start_date_in_year}.{self.n_days}x{self.n_steps}.{self.initial_conditions_name}.k{str(self.k).replace('.','p')}.s{self.seed}"
 
-
+        self.experiment_new_identifier = ''.join(self.experiment_identifier.split('_')[0][1:])
 
         # template dict for todos
         # the dict will later be transformed to command line arguments for the launching script
