@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#SBATCH --partition=compute     # Specify partition name
+#SBATCH --ntasks=1             # Specify max. number of tasks to be invoked
+#SBATCH --cpus-per-task=1     # Specify number of CPUs per task
+#SBATCH --time=04:00:00        # Set a limit on the total run time
+#SBATCH --output=log/%j    # File name for standard output
+#SBATCH --error=log/%j    # File name for standard error output
+#SBATCH --job-name=c12_wet_step18
+#SBATCH --account=bb1445
+#SBATCH --begin=now+10minute
+#SBATCH --dependency=afterok:18107951,18107949,18107912,18107911,18107892,18107872,18107854,18107835,18107772,18107753,18107732,18107719,18107752,18107731,18107718,18107833,18107771,18107888,18107871,18107853
+
+module purge
+module load subversion python3/2022.01-gcc-11.2.0 esmf/8.2.0-intel-2021.5.0
+module load esmf/8.2.0-intel-2021.5.0 gcc intel-oneapi-compilers/2022.0.1-gcc-11.2.0 intel-oneapi-mkl/2022.0.1-gcc-11.2.0
+module load openmpi/4.1.2-intel-2021.5.0
+module load cdo nco python3/2022.01-gcc-11.2.0
+module load nano emacs ncview tree
+python main_launcher.py --experiment c12_wet --verbose --relaunch_cases_which_are_unclear --relaunch_after_completion

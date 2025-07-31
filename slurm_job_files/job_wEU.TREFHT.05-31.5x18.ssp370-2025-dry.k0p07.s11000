@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#SBATCH --partition=compute     # Specify partition name
+#SBATCH --ntasks=1             # Specify max. number of tasks to be invoked
+#SBATCH --cpus-per-task=1     # Specify number of CPUs per task
+#SBATCH --time=04:00:00        # Set a limit on the total run time
+#SBATCH --output=log/%j    # File name for standard output
+#SBATCH --error=log/%j    # File name for standard error output
+#SBATCH --job-name=c11_dry_step18
+#SBATCH --account=bb1445
+#SBATCH --begin=now+10minute
+#SBATCH --dependency=afterok:17992069,17992091,17992209,17992208,17992196,17992176,17992156,17992147,17992130,17992115,17992105,17992195,17992175,17992155,17992146,17992129,17992114,17992104,17990183
+
+module purge
+module load subversion python3/2022.01-gcc-11.2.0 esmf/8.2.0-intel-2021.5.0
+module load esmf/8.2.0-intel-2021.5.0 gcc intel-oneapi-compilers/2022.0.1-gcc-11.2.0 intel-oneapi-mkl/2022.0.1-gcc-11.2.0
+module load openmpi/4.1.2-intel-2021.5.0
+module load cdo nco python3/2022.01-gcc-11.2.0
+module load nano emacs ncview tree
+python main_launcher.py --experiment c11_dry --verbose --relaunch_cases_which_are_unclear --relaunch_after_completion
