@@ -9,7 +9,7 @@
 #SBATCH --job-name=p6_step14
 #SBATCH --account=bb1445
 #SBATCH --begin=now+10minute
-#SBATCH --dependency=afterok:18769846
+#SBATCH --dependency=afterok:18913277
 
 module purge
 module load subversion python3/2022.01-gcc-11.2.0 esmf/8.2.0-intel-2021.5.0

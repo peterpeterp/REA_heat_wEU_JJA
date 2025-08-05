@@ -2,6 +2,8 @@
 class config():
     initial_conditions_name = 'ssp370-2025'
 
+    ensemble_type = 'rea_legacy'
+
     # bias parameter k
     k = 0.03
 

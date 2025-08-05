@@ -2,6 +2,8 @@
 class config():
     initial_conditions_name = 'piControl'
 
+    ensemble_type = 'rea_legacy'
+
     # bias parameter k
     k = 0.03
 
