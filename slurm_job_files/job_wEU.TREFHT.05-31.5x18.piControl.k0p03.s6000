@@ -6,10 +6,10 @@
 #SBATCH --time=04:00:00        # Set a limit on the total run time
 #SBATCH --output=log/%j    # File name for standard output
 #SBATCH --error=log/%j    # File name for standard error output
-#SBATCH --job-name=p6_step14
+#SBATCH --job-name=p6_step18
 #SBATCH --account=bb1445
 #SBATCH --begin=now+10minute
-#SBATCH --dependency=afterok:18913277
+#SBATCH --dependency=afterok:19059986,19059999,19060199,19060198,19060185,19060184,19060174,19060173,19060165,19060164,19060150,19060149,19060137,19060136,19060110,19060098,19060086,19060074,19060056,19060029,19060012,19057371,19060073,19060028,19060055,19060097,19060109,19060085
 
 module purge
 module load subversion python3/2022.01-gcc-11.2.0 esmf/8.2.0-intel-2021.5.0
