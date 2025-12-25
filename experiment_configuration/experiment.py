@@ -69,6 +69,9 @@ class experiment():
 
         self.experiment_new_identifier = ''.join(self.experiment_identifier.split('_')[0][1:])
 
+        # python environment required for the computation of main_observable
+        self.python_environment_path = '/home/u/u290372/.conda/envs/py_imps/bin/python'
+
         # template dict for todos
         # the dict will later be transformed to command line arguments for the launching script
         self.launch_template = {
