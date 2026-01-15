@@ -1,6 +1,6 @@
 
 class config():
-    initial_conditions_name = 'ssp370-2025-wet'
+    initial_conditions_name = 'ssp370-2025-dry'
 
     # bias parameter k
     k = 0.07
@@ -9,7 +9,7 @@ class config():
     seed = 8000
 
     # identifier used in sacct and for other purposes
-    experiment_identifier = 'c8_wet'
+    experiment_identifier = 'c8_dry'
 
     ensemble_type = 'rea'
 

@@ -1,6 +1,6 @@
 
 class config():
-    initial_conditions_name = 'ssp370-2025-wet'
+    initial_conditions_name = 'ssp370-2025-dry'
     
     ensemble_type = 'rea'
 
@@ -11,7 +11,7 @@ class config():
     seed = 7000
 
     # identifier used in sacct and for other purposes
-    experiment_identifier = 'c7_wet'
+    experiment_identifier = 'c7_dry'
 
 
 
