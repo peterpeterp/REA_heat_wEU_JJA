@@ -10,6 +10,7 @@ class experiment():
         self.dir_scripts=f"/work/bb1152/u290372/cesm215/cime/scripts"
         self.dir_run=f"/scratch/u/u290372/cesm215_output"
         self.dir_work=f"/work/bb1152/u290372"
+        self.dir_export=f"/work/bb1152/u290372"
 
         # launching script
         self.launching_script = "/home/u/u290372/projects/REA_with_CESM2/branch_perturbed.py"

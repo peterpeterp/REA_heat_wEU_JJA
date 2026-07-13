@@ -1,4 +1,4 @@
-import sys,importlib
+import sys,importlib,glob
 import xarray as xr
 import numpy as np
 sys.path.append('../../')
@@ -10,7 +10,20 @@ preprocessing_attr = 'regional average over region of interest'
 
 dummy_exp = experiment(importlib.import_module(f"experiment_configuration.c1").config)
 
-def preprocessor(nc, *args):
+def preprocessor(archive_path, **kwargs):
+
+    search_path = f"{archive_path}/{kwargs['realm']}/hist/*{kwargs['h_identifier']}*.nc"
+    h_files = glob.glob(search_path)
+    
+    if len(h_files) == 1:
+        nc = xr.open_dataset(h_files[0])
+    
+    elif len(h_files) > 1:
+        nc = xr.open_mfdataset(h_files, combine='nested', concat_dim='time', data_vars='all')
+
+    else:
+        assert False, "h_file not found"
+
     nc = shift_lon(nc)
     pr = nc['PRECC'] + nc['PRECL'] 
     pr *= 24*60*60
