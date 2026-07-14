@@ -4,6 +4,10 @@ cd ../../REA_with_CESM2/data_extractor
 
 ID=$1
 
+python ../../REA_with_CESM2/data_extractor/extract.py --realm atm --h_identifier h1 --variable Z500 --preprocessing rbEU --project_path ../../REA_heat_wEU_JJA/ --experiment_identifiers $ID
+
+exit 0
+
 python ../../REA_with_CESM2/data_extractor/extract.py --realm atm --h_identifier h1 --variable TREFHT --preprocessing regional_average_TREFHT --project_path ../../REA_heat_wEU_JJA/ --experiment_identifiers $ID
 
 python ../../REA_with_CESM2/data_extractor/extract.py --realm atm --h_identifier h1 --variable obs --preprocessing obs --project_path ../../REA_heat_wEU_JJA/ --experiment_identifiers $ID

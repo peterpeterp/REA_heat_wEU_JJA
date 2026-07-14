@@ -26,5 +26,14 @@ for preprocessing in "$@"; do
    prev_param="$preprocessing"
 done
 
+# Loop through all the arguments passed to the script
+prev_param=""
+for experiment_identifiers in "$@"; do
+   if [[ "$prev_param" == "--experiment_identifiers" ]]; then
+      NAME=$variable$preprocessing$experiment_identifiers
+      break
+   fi
+done
 
-sbatch -J extract_$NAME slurm_job.sh ~/.conda/envs/py_imps/bin/python3 extract.py "$@"
+
+sbatch -J extract_$NAME slurm_job.sh ~/.conda/envs/py_imps/bin/python3 ../../REA_with_CESM2/data_extraction/extract.py "$@"
