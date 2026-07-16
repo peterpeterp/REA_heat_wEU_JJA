@@ -4,6 +4,7 @@ class config():
 
     # bias parameter k
     k = 0.07
+    k_sign = 1
 
     # random seed for numpy
     seed = 8000

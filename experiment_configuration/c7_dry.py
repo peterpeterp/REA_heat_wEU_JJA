@@ -6,7 +6,8 @@ class config():
 
     # bias parameter k
     k = 0.05
-
+    k_sign = 1
+    
     # random seed for numpy
     seed = 7000
 
