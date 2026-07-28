@@ -1,4 +1,4 @@
-import sys,glob
+import sys,glob,pickle
 import xarray as xr
 import numpy as np
 
@@ -23,38 +23,15 @@ def preprocessor(archive_path, **kwargs):
     nc = nc.roll(lon=144, roll_coords=True)
     nc = nc.assign_coords(lon=(nc.lon + 180) % 360 - 180).sel(dict(lat=slice(10,80), lon=slice(-30,50)))
 
+    with open('/home/u/u290372/projects/post_heat_wEU_JJA/a_cities/city_locations.pkl', 'rb') as fl:
+        city_locations = pickle.load(fl)
+
     l = []
-    for y, x, name in [
-        # Western Europe
-        (52.5200, 13.4050, "Berlin"),        # Germany
-        (48.8566, 2.3522, "Paris"),          # France
-        (51.5074, -0.1278, "London"),        # UK
-        (52.3676, 4.9041, "Amsterdam"),      # Netherlands
-        (50.8503, 4.3517, "Brussels"),       # Belgium
-
-        # Northern Europe
-        (59.3293, 18.0686, "Stockholm"),     # Sweden
-        (60.1699, 24.9384, "Helsinki"),      # Finland
-        (55.6761, 12.5683, "Copenhagen"),    # Denmark
-        (64.1466, -21.9426, "Reykjavik"),    # Iceland
-
-        # Southern Europe
-        (40.4168, -3.7038, "Madrid"),        # Spain
-        (41.9028, 12.4964, "Rome"),          # Italy
-        (37.9838, 23.7275, "Athens"),        # Greece
-        (38.7223, -9.1393, "Lisbon"),        # Portugal
-
-        # Eastern Europe
-        (55.7558, 37.6173, "Moscow"),        # Russia
-        (50.0647, 19.9450, "Krakow"),        # Poland
-        (47.4979, 19.0402, "Budapest"),      # Hungary
-        (44.4268, 26.1025, "Bucharest"),     # Romania
-        (50.4501, 30.5234, "Kyiv"),          # Ukraine
-        (42.6977, 23.3219, "Sofia")          # Bulgaria
-    ]:
+    for city_name in city_locations.keys():
+        y,x = city_locations[city_name]
         xxx = nc.sel(dict(lat=y, lon=x), method='nearest').squeeze()
         xxx = xxx.expand_dims('city')
-        xxx = xxx.assign_coords(city=[name])
+        xxx = xxx.assign_coords(city=[city_name])
         l.append(xxx)
 
     return xr.concat(l, dim='city')
