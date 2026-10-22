@@ -8,9 +8,13 @@ preprocessing_attr = 'some cities in Europe'
 
 def preprocessor(archive_path, **kwargs):
 
-    search_path = f"{archive_path}/{kwargs['realm']}/hist/*{kwargs['h_identifier']}*.nc"
+    if 'initial_year' in kwargs.keys():
+        search_path = f"{archive_path}/{kwargs['realm']}/hist/*{kwargs['h_identifier']}.{kwargs['initial_year']}*.nc"
+    else:
+        search_path = f"{archive_path}/{kwargs['realm']}/hist/*{kwargs['h_identifier']}*.nc"
+        
     h_files = glob.glob(search_path)
-    
+
     if len(h_files) == 1:
         nc = xr.open_dataset(h_files[0])
     
@@ -19,6 +23,8 @@ def preprocessor(archive_path, **kwargs):
 
     else:
         assert False, "h_file not found"
+
+    
 
     nc = nc.roll(lon=144, roll_coords=True)
     nc = nc.assign_coords(lon=(nc.lon + 180) % 360 - 180).sel(dict(lat=slice(10,80), lon=slice(-30,50)))

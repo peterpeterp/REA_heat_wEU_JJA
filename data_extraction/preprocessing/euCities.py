@@ -8,7 +8,11 @@ preprocessing_attr = 'some cities in Europe'
 
 def preprocessor(archive_path, **kwargs):
 
-    search_path = f"{archive_path}/{kwargs['realm']}/hist/*{kwargs['h_identifier']}*.nc"
+    if 'initial_year' in kwargs.keys():
+        search_path = f"{archive_path}/{kwargs['realm']}/hist/*{kwargs['h_identifier']}.{kwargs['initial_year']}*.nc"
+    else:
+        search_path = f"{archive_path}/{kwargs['realm']}/hist/*{kwargs['h_identifier']}*.nc"
+
     h_files = glob.glob(search_path)
     
     if len(h_files) == 1:
